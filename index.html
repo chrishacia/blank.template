@@ -3,8 +3,10 @@
     <head>
         <meta charset="utf-8">
         <title>Simple Web Site</title>
-        <meta name="description" content="The HTML5 Herald">
-        <meta name="author" content="SitePoint">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Something or Another">
+        <meta name="author" content="Christopher Hacia">
         <link rel="stylesheet" type="text/css" href="./assets/css/bootstrap.min.css?ver=1.0.000">
         <link rel="stylesheet" type="text/css" href="./assets/css/bootstrap-theme.min.css?ver=1.0.000">
         <link rel="stylesheet" type="text/css" href="./assets/css/colorbox.css?ver=1.0.000">
@@ -27,7 +29,7 @@
                 <a class="navbar-brand" href="#">Brand</a>
               </div>
               <div class="navbar-collapse collapse navbar-responsive-collapse">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav" style="display:none;">
                   <li class="active"><a href="#">Active</a></li>
                   <li><a href="#">Link</a></li>
                   <li class="dropdown">
@@ -43,25 +45,30 @@
                     </ul>
                   </li>
                 </ul>
-                <form class="navbar-form navbar-left">
+                <form class="navbar-form navbar-left" style="display:none;">
                   <input type="text" class="form-control col-lg-8" placeholder="Search">
                 </form>
                 <ul class="nav navbar-nav navbar-right">
-                  <li><a href="#">Link</a></li>
+                  <li style="display:none;"><a href="#">Register</a></li>
                   <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                      <li><a href="#">Action</a></li>
-                      <li><a href="#">Another action</a></li>
-                      <li><a href="#">Something else here</a></li>
-                      <li class="divider"></li>
-                      <li><a href="#">Separated link</a></li>
-                    </ul>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Login <b class="caret"></b></a>
+                    <div class="dropdown-menu" style="padding: 15px;">
+						<form action="[YOUR ACTION]" method="post" accept-charset="UTF-8">
+						  <input id="user_username" style="margin-bottom: 15px;" type="text" name="user[username]" size="30" />
+						  <input id="user_password" style="margin-bottom: 15px;" type="password" name="user[password]" size="30" />
+						  <input id="user_remember_me" style="float: left; margin-right: 10px;" type="checkbox" name="user[remember_me]" value="1" />
+						  <label class="string optional" for="user_remember_me"> Remember me</label>
+
+						  <input class="btn btn-primary" style="clear: left; width: 100%; height: 32px; font-size: 13px;" type="submit" name="commit" value="Sign In" />
+						</form>
+                    </div>
                   </li>
                 </ul>
               </div>
             </div>
         <!-- /boostrap header -->
+
+
         <table id="budget_table" class="dataTable">
             <thead>
                 <tr>
@@ -71,24 +78,74 @@
                 </tr>
             </thead>
             <tbody>
-                <tr data-budget_id="0" class="not_paid">
-                    <td>150.00</td>
-                    <td>PG & E</td>
-                    <td><i class="icon-edit"></i>Test</td>
-                </tr>
             </tbody>
         </table>
 
     <script type="text/javascript" src="./assets/js/jquery-1.11.1.min.js?ver=1.0.000"></script>
+    <script type="text/javascript" src="./assets/js/moment.js?ver=1.0.000"></script>
+    <script type="text/javascript" src="./assets/js/moment-timezone.js?ver=1.0.000"></script>
     <script type="text/javascript" src="./assets/js/jquery.cookie.js?ver=1.0.000"></script>
     <script type="text/javascript" src="./assets/js/jquery.colorbox-min.js?ver=1.0.000"></script>
     <script type="text/javascript" src="./assets/js/bootstrap.min.js?ver=1.0.000"></script>
     <script type="text/javascript" src="./assets/js/datatables/jquery.dataTables.min.js?ver=1.0.000"></script>
     <script type="text/javascript" src="./assets/js/global.functions.js?ver=1.0.000"></script>
     <script type="text/javascript">
+		function countObjs(obj)
+		{
+			var count = 0;
+			for(var prop in obj) {
+				if (obj.hasOwnProperty(prop))
+				{
+					++count;
+				}
+			}
+			return count;
+		}
+
+		var budget_prop = {};
+			budget_prop.id_1 = {};
+			budget_prop.id_1.cost = 495.63;
+			budget_prop.id_1.desc = 'PG & E';
+			budget_prop.id_1.date = new Date();
+			budget_prop.id_1.paid = false;
+			budget_prop.id_1.paid_date = new Date();
+			budget_prop.id_2 = {};
+			budget_prop.id_2.cost = 197.59;
+			budget_prop.id_2.desc = 'Water & Sewage';
+			budget_prop.id_2.date = new Date();
+			budget_prop.id_2.paid = false;
+			budget_prop.id_2.paid_date = new Date();
+			budget_prop.id_3 = {};
+			budget_prop.id_3.cost = 350.01;
+			budget_prop.id_3.desc = 'Groceries';
+			budget_prop.id_3.date = new Date();
+			budget_prop.id_3.paid = true;
+			budget_prop.id_3.paid_date = new Date();
+			budget_prop.id_4= {};
+			budget_prop.id_4.cost = 1800.00;
+			budget_prop.id_4.desc = 'Rent';
+			budget_prop.id_4.date = new Date();
+			budget_prop.id_4.paid = false;
+			budget_prop.id_4.paid_date = new Date();
+
         $(document).ready(function()
         {
             var budget_table = $('#budget_table').dataTable();
+            var total_cost	= 0;
+            var total_paid	= 0;
+            var objCount	= countObjs(budget_prop);
+            $.each(budget_prop, function(i,v)
+            {
+            	doTableDraw = false;
+            	if(!--objCount){doTableDraw = true}
+            	total_cost = total_cost+budget_prop[i].cost;
+            	if(budget_prop[i].paid == true)
+            	{
+            		total_paid = total_paid+budget_prop[i].cost;
+            	}
+				budget_table.fnAddData([budget_prop[i].cost, budget_prop[i].desc, 'Edit Delete'], doTableDraw);
+				if(objCount <= 0){/* alert('total_cost: '+total_cost+' total_paid: '+total_paid+' Still Due: '+ (total_cost-total_paid)); */}
+            });
         });
     </script>
     </body>
