@@ -1,5 +1,5 @@
 /*
-html,body{height:100%;margin:0 0 0 0;padding:0 0 0 0;} 
+html,body{height:100%;margin:0 0 0 0;padding:0 0 0 0;}
 body{
     font-family:Verdana;
     font-size:12px;
@@ -45,3 +45,8 @@ body{
 }
 #header_wrap ul li a{text-decoration:none;color:#e2cd24;}
 */
+
+.cloak_menu_toggle{}
+.cloak_menu_toggle i:hover{cursor:pointer;}
+.cloak_menu_hidden{display:none;}
+.cloak_menu_hidden i:hover{cursor:pointer;}

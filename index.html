@@ -75,6 +75,7 @@
                     <td>$$$</td>
                     <td>What</td>
                     <td>Action</td>
+                    <td>Due</td>
                 </tr>
             </thead>
             <tbody>
@@ -128,6 +129,19 @@
 			budget_prop.id_4.paid = false;
 			budget_prop.id_4.paid_date = new Date();
 
+
+		$(document).on('click', '.cloak_menu_toggle', function()
+		{
+			$elem = $(this);
+			toggle_state = "false";
+			if($elem.data('toggle_state') == "false")
+			{
+				toggle_state = "true";
+			}
+			$elem.data('toggle_state', toggle_state).hide().next('.cloak_menu_hidden').show();
+		});
+
+
         $(document).ready(function()
         {
             var budget_table = $('#budget_table').dataTable();
@@ -143,7 +157,7 @@
             	{
             		total_paid = total_paid+budget_prop[i].cost;
             	}
-				budget_table.fnAddData([budget_prop[i].cost, budget_prop[i].desc, 'Edit Delete'], doTableDraw);
+				budget_table.fnAddData([budget_prop[i].cost, budget_prop[i].desc, '<div class="cloak_menu_toggle" data-toggle_state="false"><i class="fa fa-dot-circle-o"></i></div><div class="cloak_menu_hidden"><i class="fa fa-edit"></i> <i class="fa fa-trash"></i> <i class="fa fa-crosshairs"></i></div>', moment(budget_prop[i].date).format('MM-DD-YYYY')], doTableDraw);
 				if(objCount <= 0){/* alert('total_cost: '+total_cost+' total_paid: '+total_paid+' Still Due: '+ (total_cost-total_paid)); */}
             });
         });
