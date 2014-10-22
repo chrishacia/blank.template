@@ -69,19 +69,6 @@
         <!-- /boostrap header -->
 
 
-        <table id="budget_table" class="dataTable">
-            <thead>
-                <tr>
-                    <td>$$$</td>
-                    <td>What</td>
-                    <td>Action</td>
-                    <td>Due</td>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-
     <script type="text/javascript" src="./assets/js/jquery-1.11.1.min.js?ver=1.0.000"></script>
     <script type="text/javascript" src="./assets/js/moment.js?ver=1.0.000"></script>
     <script type="text/javascript" src="./assets/js/moment-timezone.js?ver=1.0.000"></script>
@@ -90,77 +77,5 @@
     <script type="text/javascript" src="./assets/js/bootstrap.min.js?ver=1.0.000"></script>
     <script type="text/javascript" src="./assets/js/datatables/jquery.dataTables.min.js?ver=1.0.000"></script>
     <script type="text/javascript" src="./assets/js/global.functions.js?ver=1.0.000"></script>
-    <script type="text/javascript">
-		function countObjs(obj)
-		{
-			var count = 0;
-			for(var prop in obj) {
-				if (obj.hasOwnProperty(prop))
-				{
-					++count;
-				}
-			}
-			return count;
-		}
-
-		var budget_prop = {};
-			budget_prop.id_1 = {};
-			budget_prop.id_1.cost = 495.63;
-			budget_prop.id_1.desc = 'PG & E';
-			budget_prop.id_1.date = new Date();
-			budget_prop.id_1.paid = false;
-			budget_prop.id_1.paid_date = new Date();
-			budget_prop.id_2 = {};
-			budget_prop.id_2.cost = 197.59;
-			budget_prop.id_2.desc = 'Water & Sewage';
-			budget_prop.id_2.date = new Date();
-			budget_prop.id_2.paid = false;
-			budget_prop.id_2.paid_date = new Date();
-			budget_prop.id_3 = {};
-			budget_prop.id_3.cost = 350.01;
-			budget_prop.id_3.desc = 'Groceries';
-			budget_prop.id_3.date = new Date();
-			budget_prop.id_3.paid = true;
-			budget_prop.id_3.paid_date = new Date();
-			budget_prop.id_4= {};
-			budget_prop.id_4.cost = 1800.00;
-			budget_prop.id_4.desc = 'Rent';
-			budget_prop.id_4.date = new Date();
-			budget_prop.id_4.paid = false;
-			budget_prop.id_4.paid_date = new Date();
-
-
-		$(document).on('click', '.cloak_menu_toggle', function()
-		{
-			$elem = $(this);
-			toggle_state = "false";
-			if($elem.data('toggle_state') == "false")
-			{
-				toggle_state = "true";
-			}
-			$elem.data('toggle_state', toggle_state).hide().next('.cloak_menu_hidden').show();
-		});
-
-
-        $(document).ready(function()
-        {
-            var budget_table = $('#budget_table').dataTable();
-            var total_cost	= 0;
-            var total_paid	= 0;
-            var objCount	= countObjs(budget_prop);
-            $.each(budget_prop, function(i,v)
-            {
-            	doTableDraw = false;
-            	if(!--objCount){doTableDraw = true}
-            	total_cost = total_cost+budget_prop[i].cost;
-            	if(budget_prop[i].paid == true)
-            	{
-            		total_paid = total_paid+budget_prop[i].cost;
-            	}
-				budget_table.fnAddData([budget_prop[i].cost, budget_prop[i].desc, '<div class="cloak_menu_toggle" data-toggle_state="false"><i class="fa fa-dot-circle-o"></i></div><div class="cloak_menu_hidden"><i class="fa fa-edit"></i> <i class="fa fa-trash"></i> <i class="fa fa-crosshairs"></i></div>', moment(budget_prop[i].date).format('MM-DD-YYYY')], doTableDraw);
-				if(objCount <= 0){/* alert('total_cost: '+total_cost+' total_paid: '+total_paid+' Still Due: '+ (total_cost-total_paid)); */}
-            });
-        });
-    </script>
     </body>
 </html>
