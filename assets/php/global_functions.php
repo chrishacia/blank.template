@@ -8,12 +8,12 @@ class Genfunc
 	 * for the most part still applicable for me.
 	 * Provide an empty array/object, string and nullCheck = true. Otherwise false.
 	 */
-	 
+
     private $_tagType = array(
                             "js" =>'<script type="text/javascript" src="{script_path}{script_name}{script_ver}">{script_special}</script>',
                             "css" => '<link rel="stylesheet" type="text/css" href="{script_path}{script_name}{script_ver}">'
                         );
-    
+
 	public function nullCheck($str = null)
 	{
 		//the number 0 will give a false negative.
@@ -75,9 +75,13 @@ class Genfunc
             {
                 $swapfor[3] = $arr['script_special'];
             }
-            return str_replace($swap,$swapfor,$this->_tagType[$tagType]);            
+            if(file_exists($swapfor[0].$swapfor[1]) == true)
+            {
+                return str_replace($swap,$swapfor,$this->_tagType[$tagType])."\n";
+            }
+            return '<!-- '.$swapfor[0].$swapfor[1]. ' ~~~ false: invalid path/file name -->'."\n";
         }
 	}
-	
+
 }
 ?>
