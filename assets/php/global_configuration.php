@@ -17,8 +17,6 @@
     array_push($default_js, array("script_path"=>$default_js_dir."datatables/", "script_name"=>"jquery.dataTables.min.js", "script_ver"=>$default_js_ver));
     array_push($default_js, array("script_path"=>$default_js_dir, "script_name"=>"global.functions.js", "script_ver"=>$default_js_ver));
 
-    array_push($default_js, array("script_path"=>$default_js_dir, "script_name"=>"monkey.poop.js", "script_ver"=>$default_js_ver));
-
     $default_css_dir    = "./assets/css/";
     $default_css_ver    = "1.0.000";
     $default_css        = [];
