@@ -3,9 +3,10 @@
     $default_js_ver     = "1.0.000";
     $default_js         = [];
     $extra_js           = [];
-    array_push($default_js, array("script_path"=>$default_js_dir, "script_name"=>"jquery-1.11.1.min.js", "script_ver"=>$default_js_ver));
-    array_push($default_js, array("script_path"=>$default_js_dir, "script_name"=>"backbone-min.js", "script_ver"=>$default_js_ver));
     array_push($default_js, array("script_path"=>$default_js_dir, "script_name"=>"underscore-min.js", "script_ver"=>$default_js_ver));
+    array_push($default_js, array("script_path"=>$default_js_dir, "script_name"=>"jquery-1.11.1.min.js", "script_ver"=>$default_js_ver));
+    array_push($default_js, array("script_path"=>$default_js_dir, "script_name"=>"json2.js", "script_ver"=>$default_js_ver));
+    array_push($default_js, array("script_path"=>$default_js_dir, "script_name"=>"backbone-min.js", "script_ver"=>$default_js_ver));
     array_push($default_js, array("script_path"=>$default_js_dir, "script_name"=>"handlebars-v2.0.0.js", "script_ver"=>$default_js_ver));
     array_push($default_js, array("script_path"=>$default_js_dir, "script_name"=>"modernizr.js", "script_ver"=>$default_js_ver));
     array_push($default_js, array("script_path"=>$default_js_dir, "script_name"=>"moment.js", "script_ver"=>$default_js_ver));
