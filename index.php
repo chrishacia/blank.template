@@ -4,7 +4,7 @@
 	include_once $_SERVER["DOCUMENT_ROOT"].'/assets/php/global_functions.php';
 	include_once $_SERVER["DOCUMENT_ROOT"].'/assets/php/short_url_function.php';
 	include_once $_SERVER["DOCUMENT_ROOT"].'/assets/php/session_management.php';
-    include_once $_SERVER["DOCUMENT_ROOT"].'/assets/php/global_configuration.php';	
+    include_once $_SERVER["DOCUMENT_ROOT"].'/assets/php/global_configuration.php';
 	$sess = new Session_management;
 	$sessDetails = $sess->sessionDetails();
 	$func = new Genfunc;
@@ -18,7 +18,7 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Something or Another">
         <meta name="author" content="Christopher Hacia">
-
+		<link rel="shortcut icon" href="./assets/favicon.ico">
 <?php
     //include javascript librairies
     //defaults or globals across all page views
@@ -37,12 +37,24 @@
             echo $func->gen_tags("css",$cssE);
         }
     }
-?> 
+?>
         <!--[if lt IE 9]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js?ver=1.0.000"></script>
         <![endif]-->
     </head>
     <body>
+<?php
+	if(isset($_GET['error']))
+	{
+		if(is_numeric($_GET['error']))
+		{
+			if($_GET['error'] == (int)'404')
+			{
+				echo 'ERROR 404';
+			}
+		}
+	}
+?>
         <!-- bootstrap header -->
             <div class="navbar navbar-default">
               <div class="navbar-header">
@@ -78,7 +90,7 @@
 	if($sessDetails == false)
 	{
 ?>
-				  <li><a href="#">Register</a></li>
+				  <li style="text-decoration: line-through;"><a href="#">Register</a></li>
                   <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Login <b class="caret"></b></a>
                     <div class="dropdown-menu" style="padding: 15px;">
@@ -106,8 +118,9 @@
         <!-- /boostrap header -->
 		<div class="container theme-showcase" role="main">
 			stuff
+			<div id="bs_wrapper"></div>
 		</div>
-
+<div id="sidebar" style="width:500px;height:500px;"></div>
 <?php
     //include javascript librairies
     //defaults or globals across all page views
@@ -126,6 +139,68 @@
             echo $func->gen_tags("js",$jsE);
         }
     }
-?>    
+?>
+<script type="text/template" id="template-payment-management-table">
+	<table id="payment-management-table" class="dataTable">
+		<thead>
+			<tr>
+				<td>Amount</td>
+				<td>Company</td>
+				<td>Billed For</td>
+				<td>Due Date TS</td>
+				<td>Due Date</td>
+			</tr>
+		</thead>
+		<tfoot></tfoot>
+		<tbody>
+			<% _.each(bills, function(bill){ %>
+				 <tr data-user-id="<%= bill.bill_id %>" data-bill-paid="<%= bill.bill_paid %>">
+					<td><%= bill.bill_amount %></td>
+					<td><%= bill.compnay_name %></td>
+					<td><%= bill.bill_name %></td>
+					<td><%= bill.bill_due_ts %></td>
+					<td><%= bill.bill_due_nice %></td>
+				</tr>
+			<% }) %>
+		</tbody>
+	</table>
+</script>
+
+<script type="text/javascript">
+
+	var billsCollection = Backbone.Collection.extend({
+		model:billsModel,
+		initialize: function() {
+			console.log('Collection initialized');
+			this.add(new billsModel());
+		}
+	});
+	var billsModel = Backbone.Model.extend({
+		defaults: {
+			compnay_name	: '',
+			bill_name		: '',
+			bill_amount		: 0.00,
+			bill_id			: 0,
+			bill_due_ts		: new Date(),
+			bill_due_nice	: new Date(),
+			bill_paid		: false,
+		},
+		initialize: function() {
+			console.log('Model Initialized');
+		}
+	});
+	var billsView = Backbone.View.extend(
+	{
+		el: '#bs_wrapper',
+		template: _.template($('#template-payment-management-table').html()),
+		render:function() {
+			var data = { billed: billsCollection.toJSON() };
+			this.$el.html(this.template(this.model.attributes));
+		}
+	});
+
+	var bills = new billsModel();
+	var billView = new billsView();
+</script>
     </body>
 </html>
