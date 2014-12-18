@@ -1,0 +1,15 @@
+<IfModule mod_rewrite.c>
+Options +FollowSymLinks -MultiViews
+RewriteEngine On
+RewriteBase /
+RewriteCond $1 !^(index\.php|assets|robots\.txt)
+ErrorDocument 404 /index.php?error=404
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /index.php?htax_pa=$1 [L,QSA,NC]
+</IfModule>
+
+#<IfModule mod_security.c>
+#SecFilterEngine Off
+#SecFilterScanPOST Off
+#</IfModule>

@@ -30,4 +30,14 @@
     array_push($default_css, array("script_path"=>$default_css_dir."datatables/", "script_name"=>"jquery.dataTables.min.css", "script_ver"=>$default_css_ver));
     array_push($default_css, array("script_path"=>$default_css_dir, "script_name"=>"font-awesome.min.css", "script_ver"=>$default_css_ver));
     array_push($default_css, array("script_path"=>$default_css_dir, "script_name"=>"global.style.css", "script_ver"=>$default_css_ver));
+
+    //database credentials
+    $dbc = [];
+    $db1 = array(
+        'user'=>'',
+        'pass'=>'',
+        'host'=>'',
+        'conn'=>''
+    );
+    array_push($dbc,$db1);
 ?>
