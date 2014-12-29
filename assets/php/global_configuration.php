@@ -1,43 +1,24 @@
 <?php
-    $default_js_dir     = "./assets/js/";
-    $default_js_ver     = "1.0.000";
-    $default_js         = [];
-    $extra_js           = [];
-    array_push($default_js, array("script_path"=>$default_js_dir, "script_name"=>"jquery-1.11.1.min.js", "script_ver"=>$default_js_ver));
-    //array_push($default_js, array("script_path"=>$default_js_dir, "script_name"=>"underscore-min.js", "script_ver"=>$default_js_ver));
-    array_push($default_js, array("script_path"=>$default_js_dir.'_org/', "script_name"=>"underscore.js", "script_ver"=>$default_js_ver));
-    array_push($default_js, array("script_path"=>$default_js_dir, "script_name"=>"json2.js", "script_ver"=>$default_js_ver));
-    array_push($default_js, array("script_path"=>$default_js_dir, "script_name"=>"uuid.js", "script_ver"=>$default_js_ver));
-    array_push($default_js, array("script_path"=>$default_js_dir, "script_name"=>"backbone-min.js", "script_ver"=>$default_js_ver));
-    array_push($default_js, array("script_path"=>$default_js_dir, "script_name"=>"handlebars-v2.0.0.js", "script_ver"=>$default_js_ver));
-    array_push($default_js, array("script_path"=>$default_js_dir, "script_name"=>"modernizr.js", "script_ver"=>$default_js_ver));
-    array_push($default_js, array("script_path"=>$default_js_dir, "script_name"=>"moment.js", "script_ver"=>$default_js_ver));
-    array_push($default_js, array("script_path"=>$default_js_dir, "script_name"=>"moment-timezone.js", "script_ver"=>$default_js_ver));
-    array_push($default_js, array("script_path"=>$default_js_dir, "script_name"=>"jquery.cookie.js", "script_ver"=>$default_js_ver));
-    array_push($default_js, array("script_path"=>$default_js_dir, "script_name"=>"jquery.colorbox-min.js", "script_ver"=>$default_js_ver));
-    array_push($default_js, array("script_path"=>$default_js_dir, "script_name"=>"bootstrap.min.js", "script_ver"=>$default_js_ver));
-    array_push($default_js, array("script_path"=>$default_js_dir."flot/", "script_name"=>"jquery.flot.min.js", "script_ver"=>$default_js_ver));
-    array_push($default_js, array("script_path"=>$default_js_dir."datatables/", "script_name"=>"jquery.dataTables.min.js", "script_ver"=>$default_js_ver));
-    array_push($default_js, array("script_path"=>$default_js_dir, "script_name"=>"global.functions.js", "script_ver"=>$default_js_ver));
+	ini_set("display_errors", "1");
+	error_reporting(E_ALL);
+    $encrypt_key = '69h3OCfXtY9B3cJJ5b9JURzA37q18kt0';//32-bit string
 
-    $default_css_dir    = "./assets/css/";
-    $default_css_ver    = "1.0.000";
-    $default_css        = [];
-    $extra_css          = [];
-    array_push($default_css, array("script_path"=>$default_css_dir, "script_name"=>"bootstrap.min.css", "script_ver"=>$default_css_ver));
-    array_push($default_css, array("script_path"=>$default_css_dir, "script_name"=>"bootstrap-theme.min.css", "script_ver"=>$default_css_ver));
-    array_push($default_css, array("script_path"=>$default_css_dir, "script_name"=>"colorbox.css", "script_ver"=>$default_css_ver));
-    array_push($default_css, array("script_path"=>$default_css_dir."datatables/", "script_name"=>"jquery.dataTables.min.css", "script_ver"=>$default_css_ver));
-    array_push($default_css, array("script_path"=>$default_css_dir, "script_name"=>"font-awesome.min.css", "script_ver"=>$default_css_ver));
-    array_push($default_css, array("script_path"=>$default_css_dir, "script_name"=>"global.style.css", "script_ver"=>$default_css_ver));
+    $config                               = array();
+    $config['dbc']                        = array();
+    $config['site_meta']                  = array();
+    $config['site_meta']['title']         = '::AZUFO::';
+    $config['site_meta']['desc']          = 'AZUFO';
+    $config['site_meta']['author']        = 'Christopher Hacia';
+    $config['site_meta']['shortcut_icon'] = './assets/yin-yang.png';
+
 
     //database credentials
-    $dbc = [];
     $db1 = array(
         'user'=>'',
         'pass'=>'',
         'host'=>'',
         'conn'=>''
     );
-    array_push($dbc,$db1);
+    array_push($config['dbc'],$db1);
+
 ?>

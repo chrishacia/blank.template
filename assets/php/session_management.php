@@ -1,6 +1,13 @@
 <?php
 class Session_management
 {
+    public $_func;
+
+    public function __construct()
+    {
+        $this->_func = new Genfunc();
+    }
+
 	private function startSession()
 	{
 		session_start();
@@ -13,15 +20,19 @@ class Session_management
 	{
 		return json_encode($obj);
 	}
+	public function item($action = null, $property = null, $value = null)
+	{
+        if($action == null){return false;}
+        if($property == null){return false;}
+	}
 	public function sessionDetails()
 	{
-		$_func = new Genfunc;
 		$this->startSession();
-		if(isset($_SESSION) && $_func->nullCheck($_SESSION) == false)
+		if(isset($_SESSION) && $this->_func->nullCheck($_SESSION) == false)
 		{
-			return sessionOutput($_SESSION);
+			return $this->sessionOutput($_SESSION);
 		}
-		return false;
+		return null;
 	}
 }
 ?>
