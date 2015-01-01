@@ -1,4 +1,7 @@
-blank.template
+blank_template
 ==============
 
-This is just a starter HTML template for my own needs, containing various script libraries, css libraries, and some of my own custom additions. Admittedly I just don't like repeating the basic stuff, or going on a hunt for the latest copies of stuff every time I have a new idea. Suggestions are welcome.
+Trying to describe this as loosely as I can. This is my own rendition of a php driven micro framework. To put it as short and sweetly as I can. This is primarily a collection of JavaScript libraries and plugins that I find myself reusing on various projects / ideas. Thrown together in a simple html5 based template that I can easily append/alter. It is also a collection of CSS I have used over time, and general php functions I have written over time. All in all this whole project is something that is widely open to interpretation. I use it often, I refine it as I go. And I offer it up to those who just need a super simple starting point for there own projects. That don't have the overhead most other frameworks have. I would like to eventual roll this into very small micro MVC, but for now this works. 
+You are all welcome to use it freely as you wish, if you like it, it helps? Throw me some credit. I am also always open for suggestions / contributions. If anyone wants to enhance it. In fact if you do, I ask that you please throw them into here via pull request. 
+
+Basic HTML5 Boiler Plate Template, that includes a wide variety of JavaScript/CSS preloaded. Bootstrap, Backbone, jQuery to name a few. Coupled with repurpose-able functions I have written in JavaScript and PHP.
